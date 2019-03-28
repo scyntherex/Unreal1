@@ -30,9 +30,8 @@ int main() {
 }
 
 void PrintIntro() {
-	constexpr int32 WORD_LENGTH = 9;
 	std::cout << "\nWelcome to Bulls and Cows!" << std::endl;
-	std::cout << "Guess the " << WORD_LENGTH;
+	std::cout << "Guess the " << BCGame.GetHiddenWordLength();
 	std::cout << " letter isogram" << std::endl << std::endl;
 	return;
 }
@@ -43,13 +42,16 @@ void PlayGame() {
 	int32 MaxTries = BCGame.GetMaxTries();
 
 	//TODO change to WHILE when validating tries
-	for (int32 i = 0; i < MaxTries; i++) {
+	for (int32 count = 0; count < MaxTries; count++) {
 		FText Guess = GetGuess(); //TODO make loop checking valid
 
 		//Submit valid guess to the game
+		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 		//Print number of bulls and cows
 
-		std::cout << "Your guess was " << Guess << std::endl;
+		std::cout << "Bulls = " << BullCowCount.Bulls;
+		std::cout << ". Cows = " << BullCowCount.Cows << std::endl;
+
 		std::cout << std::endl;
 	}
 
