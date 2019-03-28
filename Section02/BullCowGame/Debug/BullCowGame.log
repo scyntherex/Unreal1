@@ -1,0 +1,5 @@
+﻿  FBullCowGame.cpp
+  main.cpp
+c:\users\rone caballero\desktop\projects\unreal\unreal1\section02\bullcowgame\main.cpp(29): warning C4101: 'BCGame': unreferenced local variable
+  Generating Code...
+  BullCowGame.vcxproj -> C:\Users\Rone Caballero\Desktop\Projects\Unreal\Unreal1\Section02\Debug\BullCowGame.exe
