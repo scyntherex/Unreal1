@@ -1,6 +1,10 @@
+/* Game logic (please keep away from direct user interaction
+*/
+
 #pragma once
 #include <string>
 
+//to make syntax Unreal firendly
 using FString = std::string;
 using int32 = int;
 
@@ -30,17 +34,14 @@ public:
 	bool IsGameWon() const;
 
 	EGuessWordStatus CheckGuessValidity(FString) const;
-
 	FBullCowCount SubmitValidGuess(FString);
-
-	
 
 private:
 	//see constructor for initialization
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 
 	bool IsIsogram(FString) const;
+	bool IsLowercase(FString) const;
 };

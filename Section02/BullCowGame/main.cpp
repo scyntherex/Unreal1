@@ -2,11 +2,13 @@
 Acts as MVC pattern and is responsible for interaction.
 Game logic is in FBullCowClass
 */
+#pragma once
 
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
 
+//to make syntax Unreal firendly
 using FText = std::string;
 using int32 = int;
 
@@ -16,7 +18,7 @@ FText GetValidGuess();
 bool AskToPlayAgain();
 void PrintGameSummary();
 
-FBullCowGame BCGame; //instantiate new game
+FBullCowGame BCGame; //instantiate new game, reused across plays
 
 int main() {
 
@@ -31,9 +33,11 @@ int main() {
 }
 
 void PrintIntro() {
-	std::cout << "\nWelcome to Bulls and Cows!" << std::endl;
-	std::cout << "Guess the " << BCGame.GetHiddenWordLength();
-	std::cout << " letter isogram" << std::endl << std::endl;
+	std::cout << "##################################";
+	std::cout << "\n#   Welcome to Bulls and Cows!   #";
+	std::cout << "\n#   Guess the " << BCGame.GetHiddenWordLength();
+	std::cout << " letter isogram   #" << std::endl;
+	std::cout << "##################################" << std::endl << std::endl;
 	return;
 }
 
@@ -51,7 +55,7 @@ void PlayGame() {
 
 		std::cout << "Bulls = " << BullCowCount.Bulls;
 		std::cout << ". Cows = " << BullCowCount.Cows << "\n\n";
-		std::cout << std::endl;
+		//std::cout << std::endl;
 	}
 
 	PrintGameSummary();
@@ -65,7 +69,7 @@ FText GetValidGuess() {
 	EGuessWordStatus Status = EGuessWordStatus::Invalid_Status;
 	do {
 		int32 CurrentTry = BCGame.GetCurrentTry();
-		std::cout << "Attempt no. " << CurrentTry;
+		std::cout << "Attempt " << CurrentTry << "/" << BCGame.GetMaxTries();
 		std::cout << ". Enter guess here: ";
 		
 		getline(std::cin, Guess);
@@ -73,18 +77,18 @@ FText GetValidGuess() {
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status) {
 		case EGuessWordStatus::Wrong_Length:
-			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.";
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n\n";
 			break;
 		case EGuessWordStatus::Not_Isogram:
-			std::cout << "Please enter a word without repeating letters.";
+			std::cout << "Please enter a word without repeating letters.\n\n";
 			break;
 		case EGuessWordStatus::Not_Lowercase:
-			std::cout << "Please enter all lowercase letters.";
+			std::cout << "Please enter all lowercase letters.\n\n";
 			break;
 		default:
 			break;
 		}
-		std::cout << std::endl << std::endl;
+		
 	} while (Status != EGuessWordStatus::OK);
 	return Guess;
 }
